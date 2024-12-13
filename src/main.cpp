@@ -24,7 +24,7 @@ void esp_now_setup();
 void onSent(const uint8_t *mac_addr, esp_now_send_status_t status);
 
 void setup() {
-    pinMode(BTN_PIN, INPUT);
+    pinMode(BTN_PIN, INPUT_PULLUP);
     Serial.begin(115200);
     while (!Serial);
 
@@ -36,7 +36,7 @@ void setup() {
 
 void loop() {
     // ボタンが押されているかのチェック
-    if (digitalRead(BTN_PIN) == HIGH) {
+    if (digitalRead(BTN_PIN) == LOW) {
         if (buttonPressStart == 0) {
             buttonPressStart = millis(); // 押された時間を記録
         } else if (millis() - buttonPressStart >= 3000) {
